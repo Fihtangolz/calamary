@@ -21,7 +21,9 @@
     "package-win": "npm run build && build --win --x64",
     "package-linux": "npm run build && build --linux",
     "package-all": "npm run build && build -mwl",
-    "cleanup": "mop -v"
+    "cleanup": "mop -v",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "jest": {
     "moduleNameMapper": {
@@ -115,7 +117,7 @@
     "@types/history": "^4.5.2",
     "@types/jest": "^22.0.0",
     "@types/node": "^8.0.2",
-    "@types/react": "^16.0.5",
+    "@types/react": "^16.7.7",
     "@types/react-dom": "16.0.3",
     "@types/react-hot-loader": "^3.0.4",
     "@types/react-redux": "^5.0.4",
@@ -136,6 +138,7 @@
     "electron-builder-http": "^19.15.0",
     "electron-devtools-installer": "^2.0.1",
     "enzyme": "^3.0.0",
+    "enzyme-adapter-react-16": "^1.0.0",
     "express": "^4.14.0",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^1.1.5",
@@ -146,7 +149,6 @@
     "node-sass": "^4.1.1",
     "react-hot-loader": "^3.0.0-beta.6",
     "react-test-renderer": "^16.0.0",
-    "enzyme-adapter-react-16": "^1.0.0",
     "redux-logger": "^3.0.6",
     "sass-loader": "^6.0.6",
     "sinon": "^4.0.0",
@@ -160,14 +162,22 @@
     "webpack": "^3.3.0",
     "webpack-dev-middleware": "^2.0.3",
     "webpack-hot-middleware": "^2.13.2",
-    "webpack-merge": "^4.1.1"
+    "webpack-merge": "^4.1.1",
+    "@storybook/react": "^4.0.8",
+    "@storybook/addon-actions": "^4.0.8",
+    "@storybook/addon-links": "^4.0.8",
+    "@storybook/addons": "^4.0.8",
+    "@babel/core": "^7.1.6",
+    "babel-loader": "^8.0.4"
   },
   "dependencies": {
     "electron-debug": "^1.1.0",
     "font-awesome": "^4.7.0",
     "history": "^4.6.1",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
+    "marked": "^0.5.2",
+    "react": "^16.7.0-alpha.2",
+    "react-bulma-components": "^2.3.0",
+    "react-dom": "^16.7.0-alpha.2",
     "react-redux": "^5.0.1",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",

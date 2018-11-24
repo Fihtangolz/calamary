@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "noUnusedParameters": false,
+
+    
     "target": "es5",
     "moduleResolution": "node",
     "module": "commonjs",
@@ -17,11 +21,11 @@
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
-    "noUnusedLocals": true,
+    "noUnusedLocals": false,
     
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-
+    
     "sourceMap": true,
 
     "outDir": "dist"
