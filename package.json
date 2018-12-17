@@ -171,6 +171,10 @@
     "babel-loader": "^8.0.4"
   },
   "dependencies": {
+    "@mdi/font": "^3.0.39",
+    "@mdi/js": "^3.0.39",
+    "@mdi/react": "^1.1.0",
+    "d3": "^5.7.0",
     "electron-debug": "^1.1.0",
     "font-awesome": "^4.7.0",
     "history": "^4.6.1",

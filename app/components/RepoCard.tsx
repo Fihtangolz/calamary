@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { RowConteiner, CollumConteiner } from './Layout';
 import { useRef, useState, useEffect } from 'react';
 import { strictEqual } from 'assert';
 
@@ -38,18 +39,13 @@ const BlockWrap = ({children}: any) => (
     </div>
 );
 
-const RowConteiner = ({children, style, ...etc}: any) => (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        ...style
-      }}
-      {...etc}
-    >
-        {children}   
-    </div>
-);
+export const HeaderBord = () => {
+    return(
+        <>
+        <div style={{ margin: "180px", width: "100%", height: "100px", backgroundColor: "red",}}/>
+        </>
+    );
+};
 
 const Summary = (data: any) => {
     const [some, setSome] = useState(false);
@@ -87,7 +83,6 @@ const ListShower = () => {
 
     return(
         <>
-
         </>
     );
 };
@@ -96,7 +91,7 @@ const ReadmeViewer = ({filePath}:any) => {
     const [rawData, setRawData] = useState("");
 
     useEffect(()=>{
-        fs.readFile("/Projects/calamary/README.md", (err: any, data: any) => {
+        fs.readFile("/Projects/calamary/node_modules/7zip/README.md", (err: any, data: any) => {
             if (err) throw err;
             setRawData(data.toString());
             console.log(marked(data.toString()))
@@ -129,33 +124,73 @@ const ReadmeViewer = ({filePath}:any) => {
     );
 };
 
+const CardWrapper = ({children}: any) => {
+    return(
+        <div 
+        style={{
+            width: "300px",
+            backgroundColor: "rgb(33, 33, 36)",
+            boxShadow: "2px 2px 2px 0px black",
+        }}
+    >
+        {children}
+    </div>
+    );
+}
+
+const CardHeader = () => (
+    <RowConteiner>
+        <div style={{ height: "20px", width: "20px", backgroundColor: "red",}}/>
+        <text style={{ color: "white"}}>fffaraz/awesome-cpp</text>
+        <div style={{ height: "20px", width: "20px", backgroundColor: "red",}}/>
+    </RowConteiner>    
+);
+
+const ActivityChart = ({data}: any) => (
+    <div style={{ height: "40px", backgroundColor: "green", margin: "5px"}}>
+        <div style={{
+
+        }}>
+            {[...Array(10).keys()].map((el, index)=>(
+                <div 
+                    key={index} 
+                    style={{
+                        height: "1px", 
+                        width: "100%", 
+                        marginTop: "3px",
+                        backgroundColor: "rgb(57, 57, 59)"
+                    }}
+                />
+            ))}
+        </div>
+        <RowConteiner>
+            {[...Array(30).keys()].map((el, index)=>(
+                [<div key={index} style={{height: index+"px", width: "3px", backgroundColor: "red"}}/>,
+                <div key={index} style={{height: "10px", width: "1px", backgroundColor: "blue"}}/>]
+            ))}
+        </RowConteiner> 
+    </div>
+);
+
+export const OverviewCard = ({children}: any) => {
+
+    return(
+        <CardWrapper>
+            <BlockWrap>
+                <CardHeader/> 
+            </BlockWrap>
+            <BlockWrap>
+                <ActivityChart/>
+            </BlockWrap>
+        </CardWrapper>
+    );
+};
+
 export const RepoCard = () => {
     
     return(
-        <div 
-            style={{
-                margin: "80px",
-
-                width: "300px",
-                backgroundColor: "white",
-                borderRadius: "2px",
-
-                borderColor: "black",
-                borderStyle: "solid",
-                borderWidth: "1px 1px 1px 1px",
-            }}
-        >
-        <div 
-        style={{ 
-            margin: "5px",
-            display: "flex",
-            flexDirection: "row",  
-            }}
-        >
-            <div style={{ height: "20px", width: "20px", backgroundColor: "red",}}/>
-            <text style={{ color: "black"}}>fffaraz/awesome-cpp</text>
-            <div style={{ height: "20px", width: "20px", backgroundColor: "red",}}/>
-        </div>
+        <CardWrapper>
+            <CardHeader/>
             <div>
             {["cpp", 
             "cppcon", 
@@ -172,12 +207,13 @@ export const RepoCard = () => {
                 <Summary data={[{name: "kek", percent: 12}]}/>  
                 <ListShower/>  
             </BlockWrap>
-            <div style={{ height: "20px", backgroundColor: "green", margin: "5px"}}/>
-
+            <BlockWrap>
+                <ActivityChart/>
+            </BlockWrap>    
             <BlockWrap style={{ overflow: "scroll", }}>
                 <ReadmeViewer/>
             </BlockWrap>
-        </div>
+        </CardWrapper>
     );
 };
 

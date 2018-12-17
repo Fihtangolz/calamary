@@ -1,66 +1,80 @@
 import * as React from 'react';
+import { useRef, useState, useEffect } from 'react';
+import Icon, { Stack } from '@mdi/react';
+import { mdiSettings, mdiViewDashboard, mdiGit, mdiChartAreaspline} from '@mdi/js';
+import { CollumConteiner } from "./Layout";
 
-const Button = (props: any) => (
+const Button = (props: any) => {
+  return(
     <div 
       style={{
         width: "30px",
         height: "30px",
-        backgroundColor: "green",
-
+        
         marginTop: "20px",
         flex: "none",
+        ...props.style
       }}
       onClick={props.onClick}
-    >
-    </div>
-)
-
-const CollumConteiner = (props: any) => {
-  // console.log(props.children)
-  // props.children.map((obj: any, index: any)=>{
-  //   obj.props.style = {
-  //     marginTop: "20px",
-  //   }
-  // });  
-  return(
-    <div
-      style={{
-        height: "100%",
-        padding: "0px",
-
-        display: "flex",
-        flexDirection: "column", 
-        alignItems: "center",
-
-        overflow: "scroll"
-      }}
+      onMouseEnter={props.onMouseEnterOrLeave}
+      onMouseLeave={props.onMouseEnterOrLeave}
     >
       {props.children}
     </div>
   );
-}
+};
 
 let { history } = require('../../app/store/configureStore');
 
+export const BaseButton = ({path, route, style}: any) => {
+  const [ isMouseHovered, setHover ] = useState(false);
+  return(
+    <Button  
+      onClick={()=>history.push(route)} 
+      onMouse
+      style={{...style}}
+      onMouseEnterOrLeave={()=>setHover(!isMouseHovered)}
+    >
+      <Icon  
+        path={path}
+        size={1}
+        horizontal
+        vertical
+        rotate={180}
+        color={isMouseHovered ? "white" : "#888"}
+      />
+    </Button>
+  );
+};
+
 export const SideBar = () => {
-    // const [ menuItems ] = React.useState(0)
+
     return(
       <div 
-        style={{
-          position: "fixed",
-          left: "0px",
-          top: "0px",
-          width: "50px",
+        style={{ 
           height: "100%",
-          backgroundColor: "red",
-          boxShadow: "1px 0px 20px 1px black",
+
+          background: "rgb(29, 31, 33)",
+          border: "1px solid rgb(45, 47, 49)",  
+          outline: "1px solid rgb(14, 15, 16)",
         }}
       >
+      <CollumConteiner>
         <CollumConteiner>
-            { Array(10).fill(0).map((_e, i)=>i+1).map(i=>{
-                return <Button key={i} onClick={()=>history.push("/some1")}/>
-              })
+            { [
+                {
+                  element: <BaseButton path={mdiChartAreaspline} route="/repoTracker"/>,
+                }, 
+                {
+                  element: <BaseButton path={mdiViewDashboard} route="/dashboard"/>,
+                }, 
+                {
+                  element: <BaseButton path={mdiGit} route="/gitClient"/>,
+                }
+              ].map((obj, i)=>obj.element)
             }
+        </CollumConteiner>
+          <BaseButton path={mdiSettings} route="/setting"/>
         </CollumConteiner>
       </div>
     );
